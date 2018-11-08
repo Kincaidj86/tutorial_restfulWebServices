@@ -3,12 +3,19 @@ package com.tutorial.rest.webservices.restfulwebservices.user;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
 @ApiModel(description="All details about the user")
+@Entity //Marks User as an Entity
 public class User {
+
+    @Id //Marks id as the primary key
+    @GeneratedValue //Marks id as a generated value by the database
     private Integer id;
     @Size(min = 2, message="Name should have at least 2 characters")
     @ApiModelProperty(notes="Name needs to have at least two characters")
