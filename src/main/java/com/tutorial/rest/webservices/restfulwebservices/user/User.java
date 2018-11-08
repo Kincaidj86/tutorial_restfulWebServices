@@ -6,9 +6,11 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @ApiModel(description="All details about the user")
 @Entity //Marks User as an Entity
@@ -23,6 +25,10 @@ public class User {
     @Past
     @ApiModelProperty(notes="Birth date must be in the past")
     private Date birthdDate;
+
+    //Mapped by the user field in Post class
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
 
     public Integer getId() {
         return id;
@@ -46,6 +52,14 @@ public class User {
 
     public void setBirthdDate(Date birthdDate) {
         this.birthdDate = birthdDate;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
     @Override
